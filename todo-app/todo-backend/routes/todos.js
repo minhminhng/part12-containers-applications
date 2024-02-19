@@ -32,7 +32,7 @@ singleRouter.delete('/', async (req, res) => {
 });
 
 /* GET todo. */
-singleRouter.get('/', async (req, res, next) => {
+singleRouter.get('/', async (req, res) => {
   if (req.todo) {
     res.json(req.todo);
   }
@@ -42,7 +42,7 @@ singleRouter.get('/', async (req, res, next) => {
 });
 
 /* PUT todo. */
-singleRouter.put('/', async (req, res) => {
+singleRouter.put('/', async (req, res, next) => {
   if (req.todo) {
     if (req.body.done) {
       req.todo.done = req.body.done
