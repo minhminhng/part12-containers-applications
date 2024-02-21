@@ -62,3 +62,4 @@ typings/
 
 # Data directory
 mongo_data/
+redis_data/
