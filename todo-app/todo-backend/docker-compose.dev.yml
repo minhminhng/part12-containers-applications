@@ -19,4 +19,21 @@ services:
       - 6378:6379
     command: ['redis-server', '--appendonly', 'yes']
     volumes:
-      - ./redis_data:/data
+      - ./redis_data:/data  
+    
+  server:                    # The name of the service, can be anything
+    image: todo-backend-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000 
+    environment:
+      - REDIS_URL=${REDIS_URL_CONTAINER}
+      - MONGO_URL=${MONGO_URL_CONTAINER}
+    depends_on:
+      - mongo
+      - redis
+    container_name: todo-backend-dev
