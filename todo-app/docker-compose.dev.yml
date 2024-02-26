@@ -6,8 +6,8 @@ services:
       dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
     volumes:
       - ./todo-frontend/:/usr/src/app
-    ports:
-      - 3001:3000
+    environment:
+      -  REACT_APP_BACKEND_URL=http://localhost:8080/api/
     container_name: todo-frontend-dev
   
   mongo:
@@ -36,12 +36,10 @@ services:
       context: /todo-backend
       dockerfile: dev.Dockerfile
     volumes:
-      - ./todo-backend/:/usr/src/app
-    ports:
-      - 3000:3000 
+      - ./todo-backend/:/usr/src/app 
     environment:
-      - REDIS_URL=${REDIS_URL_CONTAINER}
-      - MONGO_URL=${MONGO_URL_CONTAINER}
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
     depends_on:
       - mongo
       - redis
