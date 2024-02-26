@@ -33,7 +33,7 @@ services:
   server:                    # The name of the service, can be anything
     image: todo-backend-dev
     build:
-      context: /todo-backend
+      context: ./todo-backend
       dockerfile: dev.Dockerfile
     volumes:
       - ./todo-backend/:/usr/src/app 
